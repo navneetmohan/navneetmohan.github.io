@@ -3,81 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Come Again Later</title>
+    <title>Site Under Construction</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for retro terminal font (Share Tech Mono) -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for a retro vintage terminal look with yellow text and scanlines */
+        /* Custom styles for a retro vintage terminal look with monitor background */
         body {
             font-family: 'Share Tech Mono', monospace; /* Less condensed, retro-tech font */
-            background-color: #0d0d0d; /* Very dark background */
+            background-color: #0d0d0d; /* Fallback dark background */
+            /* Image as background */
+            background-image: url('jj.jpg'); /* Updated background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Changed to column to stack main content and footer */
+            justify-content: space-between; /* Distribute space between content and footer */
             align-items: center;
             min-height: 100vh;
             margin: 0;
             color: #FFEE00; /* Vibrant light yellow terminal text */
-            text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00; /* Yellow glow for all text */
-            position: relative; /* Needed for scanlines pseudo-element */
-            overflow: hidden; /* Hide overflow from scanlines */
+            text-shadow: 0 0 8px rgba(255, 238, 0, 0.9), 0 0 15px rgba(204, 170, 0, 0.7); /* Enhanced yellow glow */
+            position: relative; /* Needed for positioning content */
+            overflow: hidden; /* Hide overflow */
+
+            /* Establish 3D perspective for the bending effect */
+            perspective: 1000px; /* Stronger perspective for more noticeable bend */
         }
 
-        /* Scanline effect */
+        /* Removed scanline effect as it would conflict with the image */
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 100% 4px, 4px 100%;
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: -1; /* Place behind content */
-            opacity: 0.7; /* Adjust scanline visibility */
+            display: none;
         }
 
         .container {
-            /* No visible container element, just the content */
+            /* Adjust padding/margins to fit within the monitor screen visually */
             background-color: transparent;
             border-radius: 0;
             box-shadow: none;
-            padding: 2.5rem;
+            padding: 4rem; /* Adjusted padding to push content inwards, fitting the screen */
             text-align: center;
             max-width: 90%;
-            width: 600px;
-            border: none; /* Ensure no border on the container */
-            animation: textFlicker 2s infinite alternate; /* Subtle flicker for overall text */
+            width: 700px; /* Adjusted width for better fit within the monitor aspect ratio */
+            flex-grow: 1; /* Allows container to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            /* Animation for general text flicker is still here */
+            animation: textFlicker 2s infinite alternate;
+
+            /* 3D Transform to bend the text */
+            transform: rotateX(5deg) rotateY(0deg) translateZ(0px); /* Subtle bend along X-axis */
+            transform-origin: center center; /* Ensure rotation is from the center */
         }
 
         h1 {
             color: #FFEE00; /* Vibrant light yellow */
             margin-bottom: 1rem;
-            font-size: 3rem; /* Larger for impact */
+            font-size: 2.8rem; /* Slightly adjusted for better fit */
             font-weight: 400;
         }
         p {
-            font-size: 1.25rem; /* Slightly larger paragraph font */
-            line-height: 1.5;
+            font-size: 1.15rem; /* Slightly adjusted for better fit */
+            line-height: 1.6;
             margin-bottom: 2rem;
             color: #FFF7AE; /* Softer yellow for paragraph */
         }
         .contact-link {
-            display: inline-block; /* Allows margins and makes it behave like text */
-            margin-top: 2rem; /* Space from the paragraph above */
-            font-size: 1.25rem; /* Match paragraph font size */
-            color: #FFEE00; /* Vibrant light yellow */
-            text-decoration: none; /* Remove default underline */
-            text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00; /* Apply text glow */
-            cursor: pointer; /* Indicate it's clickable */
-            transition: color 0.1s linear, text-shadow 0.1s linear; /* Smooth transition on hover */
+            display: inline-block;
+            margin-top: 1.5rem; /* Adjusted margin */
+            font-size: 1.15rem;
+            color: #FFEE00;
+            text-decoration: none;
+            text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00;
+            cursor: pointer;
+            transition: color 0.1s linear, text-shadow 0.1s linear;
         }
         .contact-link:hover {
-            color: #FFF7AE; /* Slightly lighter yellow on hover */
-            text-shadow: 0 0 8px #FFEE00, 0 0 15px #CCAA00; /* Enhanced glow on hover */
+            color: #FFF7AE;
+            text-shadow: 0 0 8px #FFEE00, 0 0 15px #CCAA00;
         }
+        .bottom-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Stack copyright and ascii art vertically */
+            align-items: center; /* Center horizontally */
+            padding-bottom: 1rem; /* Padding from the very bottom */
+            padding-top: 1rem;
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: #999900; /* A slightly subdued yellow for copyright */
+            text-shadow: 0 0 3px rgba(255, 238, 0, 0.5); /* Subtle glow */
+            margin-bottom: 0.5rem; /* Space between copyright and ASCII art */
+        }
+
+        .ascii-art {
+            font-family: 'Share Tech Mono', monospace; /* Ensure monospace font for ASCII art */
+            color: #FFF7AE; /* Match paragraph color */
+            text-shadow: 0 0 3px rgba(255, 238, 0, 0.5); /* Subtle glow */
+            white-space: pre; /* Preserve whitespace and line breaks */
+            line-height: 0.8; /* Adjust line height to make it more compact */
+            font-size: 0.9rem; /* Slightly smaller font size for density */
+            opacity: 1; /* Increased opacity to 1 for clearer glitch effect */
+            text-align: center; /* Ensure internal text of pre is centered */
+        }
+
 
         /* Blinking cursor effect */
         .cursor::after {
@@ -93,27 +128,185 @@
 
         /* Subtle text flicker for overall content */
         @keyframes textFlicker {
-            0% { text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00; opacity: 1; }
-            5% { text-shadow: 0 0 3px #FFEE00, 0 0 8px #CCAA00; opacity: 0.98; }
-            10% { text-shadow: 0 0 6px #FFEE00, 0 0 12px #CCAA00; opacity: 1; }
-            15% { text-shadow: 0 0 4px #FFEE00, 0 0 9px #CCAA00; opacity: 0.97; }
-            20% { text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00; opacity: 1; }
-            100% { text-shadow: 0 0 5px #FFEE00, 0 0 10px #CCAA00; opacity: 1; }
+            0% { text-shadow: 0 0 8px rgba(255, 238, 0, 0.9), 0 0 15px rgba(204, 170, 0, 0.7); opacity: 1; }
+            5% { text-shadow: 0 0 7px rgba(255, 238, 0, 0.8), 0 0 13px rgba(204, 170, 0, 0.6); opacity: 0.98; }
+            10% { text-shadow: 0 0 9px rgba(255, 238, 0, 0.95), 0 0 16px rgba(204, 170, 0, 0.75); opacity: 1; }
+            15% { text-shadow: 0 0 7px rgba(255, 238, 0, 0.8), 0 0 14px rgba(204, 170, 0, 0.6); opacity: 0.97; }
+            20% { text-shadow: 0 0 8px rgba(255, 238, 0, 0.9), 0 0 15px rgba(204, 170, 0, 0.7); opacity: 1; }
+            100% { text-shadow: 0 0 8px rgba(255, 238, 0, 0.9), 0 0 15px rgba(204, 170, 0, 0.7); opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="cursor">ACCESSING: SITE IN OFFLINE MODE...</h1>
-        <p>
+        <h1 id="main-heading" class="cursor">ACCESSING: SITE IN OFFLINE MODE...</h1>
+        <p id="main-paragraph">
             SYSTEM STATUS: ENGAGING CRITICAL UPGRADE PROTOCOLS.<br>
             EXPECT REBOOT CYCLE. DATA INTEGRITY MAINTAINED.<br>
             FOR SUPPORT, INITIATE COMMUNICATION WITH ADMINISTRATOR.
         </p>
-        <a href="mailto:your-email@example.com" class="contact-link cursor">
+        <a id="contact-link-element" href="mailto:your-email@example.com" class="contact-link cursor">
             INITIATE_CONTACT_PROTOCOL
         </a>
     </div>
+
+    <!-- Combined ASCII Art and Copyright at the bottom -->
+    <div class="bottom-section">
+        <p class="copyright">
+            &copy; 2025 ALL RIGHTS RESERVED. DATA STREAM SECURED.
+        </p>
+        <pre id="glitch-art" class="ascii-art">
+         |
+    pN▒g▒p▒g▒▒g▒ge
+   ▒▒▒▒▒▒▒▓▓▒▒▒▒▒
+ _0▒▓▒▓▒▓▓▒▒▒▒▒▒▒!
+ 4▒▒▒▒▒▓▓▓▒▓▓▒▒▒▒▒Y
+ |` ~~#00▓▓0▒MMM"M|
+       `gM▓M7
+|       00Q0       |
+#▒____g▒0▓▓P______0
+#▒0g_p#▓▓04▒▒&,__M#
+0▒▒▒▒▒00   ]0▒▒▒▒00
+ |\j▒▒0'   '0▒▒▒4M'
+  |\#▒▒&▒▒gg▒▒0& |
+ " ▒▒00▒▒▒▒00▒▒'d
+ %  ¼▒  ~P▒¼▒▒|¼¼|
+ M▒9▒,▒▒ ]▒] *▒j,g
+ l▒g▒▒] @▒9
+  ~▒0▒▒▒p ▒g▒
+    @▓▒▒▒▒▒  ▒▒▓
+     M0▓▓  ▓▓^
+       `</pre>
+    </div>
+
+    <script>
+        // Disable right-click (context menu)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable common developer tool shortcuts
+        document.addEventListener('keydown', function(e) {
+            // F12 key
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Ctrl+Shift+I (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+            }
+            // Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+            }
+            // Ctrl+U (View Page Source)
+            if (e.ctrlKey && e.key === 'U') {
+                e.preventDefault();
+            }
+            // Cmd+Option+I (Mac - Inspect Element)
+            if (e.metaKey && e.altKey && e.key === 'I') {
+                e.preventDefault();
+            }
+            // Cmd+Option+J (Mac - Console)
+            if (e.metaKey && e.altKey && e.key === 'J') {
+                e.preventDefault();
+            }
+            // Cmd+U (Mac - View Page Source)
+            if (e.metaKey && e.key === 'U') {
+                e.preventDefault();
+            }
+        });
+
+        // --- Glitch Effect for all elements with random characters ---
+
+        // Get elements by their new IDs
+        const mainHeadingElement = document.getElementById('main-heading');
+        const mainParagraphElement = document.getElementById('main-paragraph');
+        const contactLinkElement = document.getElementById('contact-link-element');
+        const asciiArtElement = document.getElementById('glitch-art');
+
+        // Original text content for each element
+        const originalContent = {
+            mainHeading: `ACCESSING: SITE IN OFFLINE MODE...`,
+            mainParagraph: `SYSTEM STATUS: ENGAGING CRITICAL UPGRADE PROTOCOLS.<br>
+            EXPECT REBOOT CYCLE. DATA INTEGRITY MAINTAINED.<br>
+            FOR SUPPORT, INITIATE COMMUNICATION WITH ADMINISTRATOR.`,
+            contactLink: `INITIATE_CONTACT_PROTOCOL`,
+            asciiArt: `
+         |
+    pN▒g▒p▒g▒▒g▒ge
+   ▒▒▒▒▒▒▒▓▓▒▒▒▒▒
+ _0▒▓▒▓▒▓▓▒▒▒▒▒▒▒!
+ 4▒▒▒▒▒▓▓▓▒▓▓▒▒▒▒▒Y
+ | \` ~~#00▓▓0▒MMM"M|
+       \`gM▓M7
+|       00Q0       |
+#▒____g▒0▓▓P______0
+#▒0g_p#▓▓04▒▒&,__M#
+0▒▒▒▒▒00   ]0▒▒▒▒00
+ |\\j▒▒0'   '0▒▒▒4M'
+  |\\#▒▒&▒▒gg▒▒0& |
+ " ▒▒00▒▒▒▒00▒▒'d
+ %  ¼▒  ~P▒¼▒▒|¼¼|
+ M▒9▒,▒▒ ]▒] *▒j,g
+ l▒g▒▒] @▒9
+  ~▒0▒▒▒p ▒g▒
+    @▓▒▒▒▒▒  ▒▒▓
+     M0▓▓  ▓▓^
+       \`
+        `
+        };
+
+        // Character mapping for glitches
+        const glitchCharacterMap = {
+            'A': 'Λ', 'S': '5', 'E': 'Ξ', 'O': '0', 'I': '1', 'C': 'C', 'G': '6',
+            'T': '7', 'N': 'И', 'R': 'Я', 'D': 'Δ', 'M': 'М', 'B': '8', 'L': 'L',
+            'P': '₽', 'U': 'Ц', 'V': 'V', 'X': 'X', 'Y': 'Y', 'Z': 'Z',
+            '0': 'O', '1': 'I', '2': 'Z', '3': 'E', '4': 'A', '5': 'S', '6': 'G', '7': 'T', '8': 'B', '9': '9',
+            ' ': ' ', '<': '<', '>': '>', '/': '/', '\\': '\\', '-': '=', '_': '|',
+            '!': '¡', '.': ',', ':': ';', '&': '%', '#': '$', '~': '≈', '`': '´',
+            '|': '\\', ',': '`', '*': '+', '[': '{', ']': '}', '(': '[', ')': ']',
+            // ASCII art specific characters
+            '▒': '▓', '▓': '▒', 'g': '6', 'p': '¶', 'e': 'Ξ', 'Y': '¥', 'M': 'M', 'Q': 'Q',
+            'P': '₽', '&': '€', 'j': ']', 'd': '∂', '¼': '⅛', 'P': '₽', '@': '&', '^': '∧'
+        };
+
+        // Function to apply random glitches to a string
+        function applyRandomGlitch(originalText, glitchChance = 0.05) { // 5% chance per character
+            let glitchedText = '';
+            for (let i = 0; i < originalText.length; i++) {
+                let char = originalText[i];
+                // Check if it's an HTML entity like &lt; or &gt; or <br> and skip glitching it
+                if (char === '<' && originalText.substring(i, i + 4) === '<br>') {
+                    glitchedText += '<br>';
+                    i += 3; // Skip past the <br>
+                    continue;
+                }
+                if (Math.random() < glitchChance && glitchCharacterMap[char]) {
+                    glitchedText += glitchCharacterMap[char];
+                } else {
+                    glitchedText += char;
+                }
+            }
+            return glitchedText;
+        }
+
+        // Glitch interval for all elements
+        setInterval(() => {
+            if (mainHeadingElement) {
+                mainHeadingElement.innerHTML = applyRandomGlitch(originalContent.mainHeading);
+            }
+            if (mainParagraphElement) {
+                mainParagraphElement.innerHTML = applyRandomGlitch(originalContent.mainParagraph);
+            }
+            if (contactLinkElement) {
+                contactLinkElement.innerHTML = applyRandomGlitch(originalContent.contactLink);
+            }
+            if (asciiArtElement) {
+                // For ASCII art, apply glitch more frequently or with higher chance
+                asciiArtElement.innerHTML = applyRandomGlitch(originalContent.asciiArt, 0.1); // Higher glitch chance for ASCII
+            }
+        }, 200); // Adjusted interval to 150 milliseconds for a balanced random glitch effect
+    </script>
 </body>
 </html>
-
