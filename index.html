@@ -139,21 +139,20 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="main-heading" class="cursor">ACCESSING: SITE IN OFFLINE MODE...</h1>
+        <h1 id="main-heading" class="cursor">Site Under Construction</h1>
         <p id="main-paragraph">
-            SYSTEM STATUS: ENGAGING CRITICAL UPGRADE PROTOCOLS.<br>
-            EXPECT REBOOT CYCLE. DATA INTEGRITY MAINTAINED.<br>
-            FOR SUPPORT, INITIATE COMMUNICATION WITH ADMINISTRATOR.
+            We are currently working on an exciting new website.
+            Please check back soon for updates!
         </p>
         <a id="contact-link-element" href="mailto:your-email@example.com" class="contact-link cursor">
-            INITIATE_CONTACT_PROTOCOL
+            Contact Us
         </a>
     </div>
 
     <!-- Combined ASCII Art and Copyright at the bottom -->
     <div class="bottom-section">
         <p class="copyright">
-            &copy; 2025 ALL RIGHTS RESERVED. DATA STREAM SECURED.
+            &copy; <span id="current-year"></span> All Rights Reserved.
         </p>
         <pre id="glitch-art" class="ascii-art">
          |
@@ -217,6 +216,9 @@
             }
         });
 
+        // Set the current year in the copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // --- Glitch Effect for all elements with random characters ---
 
         // Get elements by their new IDs
@@ -227,11 +229,10 @@
 
         // Original text content for each element
         const originalContent = {
-            mainHeading: `ACCESSING: SITE IN OFFLINE MODE...`,
-            mainParagraph: `SYSTEM STATUS: ENGAGING CRITICAL UPGRADE PROTOCOLS.<br>
-            EXPECT REBOOT CYCLE. DATA INTEGRITY MAINTAINED.<br>
-            FOR SUPPORT, INITIATE COMMUNICATION WITH ADMINISTRATOR.`,
-            contactLink: `INITIATE_CONTACT_PROTOCOL`,
+            mainHeading: `Site Under Construction`,
+            mainParagraph: `We are currently working on an exciting new website.
+            Please check back soon for updates!`,
+            contactLink: `Contact Us`,
             asciiArt: `
          |
     pN▒g▒p▒g▒▒g▒ge
@@ -259,31 +260,42 @@
 
         // Character mapping for glitches
         const glitchCharacterMap = {
-            'A': 'Λ', 'S': '5', 'E': 'Ξ', 'O': '0', 'I': '1', 'C': 'C', 'G': '6',
-            'T': '7', 'N': 'И', 'R': 'Я', 'D': 'Δ', 'M': 'М', 'B': '8', 'L': 'L',
-            'P': '₽', 'U': 'Ц', 'V': 'V', 'X': 'X', 'Y': 'Y', 'Z': 'Z',
+            'a': '4', 'b': '8', 'c': '<', 'e': '3', 'g': '6', 'i': '!', 'l': '1', 'o': '0', 's': '5', 't': '7', 'w': 'vv', 'u': 'Ц',
+            'A': 'Λ', 'B': '8', 'C': 'C', 'D': 'Δ', 'E': 'Ξ', 'F': 'F', 'G': '6', 'H': 'H', 'I': '1', 'J': 'J', 'K': 'K', 'L': 'L',
+            'M': 'М', 'N': 'И', 'O': '0', 'P': '₽', 'Q': 'Q', 'R': 'Я', 'S': '5', 'T': '7', 'U': 'Ц', 'V': 'V', 'W': 'Ш', 'X': 'Ж',
+            'Y': '¥', 'Z': 'Z',
+            ' ': ' ', '.': ',', '!': '¡', '<': '<', '>': '>', '?': '?', '_': '|', ':': ';', '/': '\\',
+            '▒': '▓', '▓': '▒', '`': '´', '|': '¦', '(': '[', ')': ']', '[': '{', ']': '}',
             '0': 'O', '1': 'I', '2': 'Z', '3': 'E', '4': 'A', '5': 'S', '6': 'G', '7': 'T', '8': 'B', '9': '9',
-            ' ': ' ', '<': '<', '>': '>', '/': '/', '\\': '\\', '-': '=', '_': '|',
-            '!': '¡', '.': ',', ':': ';', '&': '%', '#': '$', '~': '≈', '`': '´',
-            '|': '\\', ',': '`', '*': '+', '[': '{', ']': '}', '(': '[', ')': ']',
-            // ASCII art specific characters
-            '▒': '▓', '▓': '▒', 'g': '6', 'p': '¶', 'e': 'Ξ', 'Y': '¥', 'M': 'M', 'Q': 'Q',
-            'P': '₽', '&': '€', 'j': ']', 'd': '∂', '¼': '⅛', 'P': '₽', '@': '&', '^': '∧'
+            'g': '6', 'p': '¶', 'e': 'Ξ', 'Y': '¥', 'M': 'M', 'Q': 'Q', 'P': '₽', '&': '€', 'j': ']', 'd': '∂',
+            '¼': '⅛', '@': '&', '^': '∧'
         };
 
         // Function to apply random glitches to a string
-        function applyRandomGlitch(originalText, glitchChance = 0.05) { // 5% chance per character
+        function applyRandomGlitch(originalText, glitchChance = 0.03) { // Decreased glitch chance
             let glitchedText = '';
             for (let i = 0; i < originalText.length; i++) {
                 let char = originalText[i];
-                // Check if it's an HTML entity like &lt; or &gt; or <br> and skip glitching it
-                if (char === '<' && originalText.substring(i, i + 4) === '<br>') {
+                // Handle <br> tags
+                if (char === '<' && originalText.substring(i, i + 4).toLowerCase() === '<br>') {
                     glitchedText += '<br>';
-                    i += 3; // Skip past the <br>
+                    i += 3; // Skip past the br
                     continue;
                 }
-                if (Math.random() < glitchChance && glitchCharacterMap[char]) {
-                    glitchedText += glitchCharacterMap[char];
+                // Handle ASCII art special cases
+                if (originalText === originalContent.asciiArt && Math.random() < 0.1) {
+                    if (glitchCharacterMap[char]) {
+                         glitchedText += glitchCharacterMap[char];
+                    } else {
+                         glitchedText += char;
+                    }
+                } else if (originalText !== originalContent.asciiArt) {
+                    // Regular text glitching
+                    if (Math.random() < glitchChance && glitchCharacterMap[char]) {
+                        glitchedText += glitchCharacterMap[char];
+                    } else {
+                        glitchedText += char;
+                    }
                 } else {
                     glitchedText += char;
                 }
@@ -303,10 +315,9 @@
                 contactLinkElement.innerHTML = applyRandomGlitch(originalContent.contactLink);
             }
             if (asciiArtElement) {
-                // For ASCII art, apply glitch more frequently or with higher chance
                 asciiArtElement.innerHTML = applyRandomGlitch(originalContent.asciiArt, 0.1); // Higher glitch chance for ASCII
             }
-        }, 200); // Adjusted interval to 150 milliseconds for a balanced random glitch effect
+        }, 150);
     </script>
 </body>
 </html>
